@@ -16,7 +16,7 @@ async fn main() {
         let mut city = String::new();
         io::stdin().read_line(&mut city).expect("Failed to read input");
         let city = city.trim();
-        let api_key = "6TDmDzHnHfrSbOlqNbeThw==1ClpzBmtubSzFeCx";
+        let api_key = "your_api_key";
         match get_weather_info(city, api_key).await {
             Ok(response) => {
                 display_weather_info(&response);

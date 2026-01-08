@@ -1,6 +1,3 @@
-// api_key = 6TDmDzHnHfrSbOlqNbeThw==1ClpzBmtubSzFeCx
-// url = https://api.api-ninjas.com/v1/weather?city={}
-
 use crate::types::weather_types::WeatherResponse;
 use reqwest::{self, Client, Response};
 
@@ -12,10 +9,11 @@ pub async  fn get_weather_info(city: &str, api_key : &str) -> Result<WeatherResp
     .get(&url)
     .header("X-Api-Key", api_key)
     .send()
-    .await?
-    .json::<WeatherResponse>()
     .await?;
-    Ok(response)
+
+    println!("response {:?}", response);
+    let json_resp = Response::json::<WeatherResponse>(response).await?;
+    Ok(json_resp)
 
 } 
 
