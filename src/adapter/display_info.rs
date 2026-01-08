@@ -1,6 +1,6 @@
 use std::fmt::format;
 
-use crate::types::weather_types::WeatherResponse;
+use crate::{adapter::get_emoji::get_temp_emoji, types::weather_types::WeatherResponse};
 
 // ///{10 items
 // "wind_speed":5.66
@@ -18,7 +18,7 @@ use crate::types::weather_types::WeatherResponse;
 pub async fn display_weather_info(response: &WeatherResponse) {
     let weather_text: String = format!(
         "
-        Weather is : 
+        Weather is {} : 
         > Temperature: {:.1} C
         > Humidity: {:.1}%
         > Wind Speed : {:.1}m/s
@@ -28,6 +28,7 @@ pub async fn display_weather_info(response: &WeatherResponse) {
         > Feels Like : {:.1}C
         > Sunrise : {:.1}
     ",
+        get_temp_emoji(response.temp),
         response.temp,
         response.humidity,
         response.wind_speed,
@@ -37,5 +38,4 @@ pub async fn display_weather_info(response: &WeatherResponse) {
         response.feels_like,
         response.sunrise
     );
-
 }
